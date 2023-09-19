@@ -1,0 +1,3 @@
+sudo useradd -s /bin/bash -d /home/ansible -m ansible
+echo "ansible:123" | chpasswd
+echo "ansible ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/90-cloud-init-users
