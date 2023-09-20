@@ -1,0 +1,29 @@
+--- #Bootstrap server
+- hosts: aws_serv
+  become: yes
+  tasks:
+  - name: updating ec2
+    apt:
+      update_cache: yes
+  - name: install "{{ service_apache }}""
+    apt:
+      name: "{{ service_apache }}"
+      state: latest
+      update_cache: yes
+  - name: delete index.html file
+    ansible.builtin.file:
+      name: /var/www/html/index.html
+      state: absent
+  - name: create index.html file
+    ansible.builtin.file:
+      name: /var/www/html/index.html
+      state: touch
+  - name: add web content
+    lineinfile:
+      line: "{{ web_content }}"
+      path: /var/www/html/index.html
+  - name: start server
+    service:
+      name: "{{ service_apache }}"
+      state: started
+

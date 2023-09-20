@@ -1,0 +1,1 @@
+ansible-playbook -i invetory apache-playbook.yml -e "web_content='Este es el contenido que yo quiero sin el XD' service_apache=apache2"
